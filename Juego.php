@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,60 +8,66 @@
     <title>Batalla Naval</title>
 </head>
 <body>
+    <h1>Batalla Naval</h1>
+    <h3>Dificultad de juego</h3>
     <form action="Juego.php" method="POST">
-        <label>Dificultad del Juego
-            <select name="opcion">
-                <option value="facil"> facil</option>
-                <option value="intermedio">intermedio</option>
-                <option value="Dificil">Dificil</option>
+            <select name="gamemode" required>
+                <option value="Fácil">Fácil</option>
+                <option value="Normal">Normal</option>
+                <option value="Difícil">Difícil</option>
             </select>
-        </label>
-        <input type="submit">
-    </form>
-    <br>
-    <form action="Juego.php" method="POST">
-        <label>
-            Posición X(letra)<input type="text" name="letra" required>
-        </label>
-        <label>
-            Posición Y(Número)<input type="number" name="numero"  min= "1" max="10" required>
-        </label>
-        <input type="submit">
-    </form>
-    <?php
-        $tabla=0;
-        if($_POST["opcion"]=="facil"){
-            $tabla=8;
-        }
-        elseif($_POST["opcion"]=="intermedio"){
-            $tabla=10;
-        }
-        else{
-            $tabla=13;
-        }
-         $tiro=[[" "],
-                ["A"=>1, "B"=>2, "C"=>3, "D"=>4, "E"=>5, "F"=>6, "G"=>7, "H"=>8, "I"=>9, "J"=>10],
-                ["A"=>1, "B"=>2, "C"=>3, "D"=>4, "E"=>5, "F"=>6, "G"=>7, "H"=>8, "I"=>9, "J"=>10],
-                ["A"=>1, "B"=>2, "C"=>3, "D"=>4, "E"=>5, "F"=>6, "G"=>7, "H"=>8, "I"=>9, "J"=>10],
-                ["A"=>1, "B"=>2, "C"=>3, "D"=>4, "E"=>5, "F"=>6, "G"=>7, "H"=>8, "I"=>9, "J"=>10],
-                ["A"=>1, "B"=>2, "C"=>3, "D"=>4, "E"=>5, "F"=>6, "G"=>7, "H"=>8, "I"=>9, "J"=>10],
-                ["A"=>1, "B"=>2, "C"=>3, "D"=>4, "E"=>5, "F"=>6, "G"=>7, "H"=>8, "I"=>9, "J"=>10],
-                ["A"=>1, "B"=>2, "C"=>3, "D"=>4, "E"=>5, "F"=>6, "G"=>7, "H"=>8, "I"=>9, "J"=>10],
-                ["A"=>1, "B"=>2, "C"=>3, "D"=>4, "E"=>5, "F"=>6, "G"=>7, "H"=>8, "I"=>9, "J"=>10],
-                ["A"=>1, "B"=>2, "C"=>3, "D"=>4, "E"=>5, "F"=>6, "G"=>7, "H"=>8, "I"=>9, "J"=>10]
-            ];
-            echo "<table border=1>";
-                for ($i=0; $i < $tabla; $i++) { 
-                    echo "<tr>";
-                    for ($e=0; $e < $tabla; $e++) {
-                        echo "<td width=20 height=20>#</td>";
-                    }
-                    echo "</tr>";
-                    echo "<br>";
+        <h2>Vidas: 
+        <?php
+            $letras=["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"];
+            $ModoDeJuego=5;
+            $vidas;
+            if($_POST["gamemode"]=="Fácil"){
+                $ModoDeJuego=8;
+                $vidas=10;
+            }
+            elseif($_POST["gamemode"]=="Normal"){
+                $ModoDeJuego=10;
+                $vidas=8;
+            }
+            else{
+                $ModoDeJuego=13;
+                $vidas=9;
+            }
+             for($i = 1; $i <= $vidas; $i++){
+                    echo "<img src='./vidas.png' width='20px' height='20px'>";
                 }
-            echo "</table>";
-            
-    ?>
-
+        ?>
+        </h2>
+        <table border="1">
+            <body>
+                <?php 
+                    echo "<tr>";
+                    echo "<td></td>";
+                        for($a = 0; $a < $ModoDeJuego; $a++){
+                            echo "<td>$letras[$a]</td>";
+                        }
+                    echo "</tr>";
+                    for($m = 1; $m <= $ModoDeJuego; $m++){
+                        echo "<tr>";
+                            echo "<td><h3>$m</h3></td>";
+                            for($t = 1; $t <= $ModoDeJuego; $t++){
+                                echo "<td><img src='./barco.jpg' width='60px' heigth='60px'></td>";
+                            }
+                        echo "</tr>";
+                    }
+                ?> 
+            </body>
+        </table>
+        <label>
+            <input type="text" name="Nombre">
+        </label>
+        <label>
+            <input type="number" name="Número">
+        </label>
+        <br>
+        
+        <input type="submit">
+        <input type="reset">
+    </form>
 </body>
 </html>
