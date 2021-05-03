@@ -9,33 +9,12 @@
 </head>
 <body>
     <h1>Batalla Naval</h1>
-    <h3>Dificultad de juego</h3>
     <form action="Juego.php" method="POST">
-            <select name="gamemode" required>
-                <option value="Fácil">Fácil</option>
-                <option value="Normal">Normal</option>
-                <option value="Difícil">Difícil</option>
-            </select>
         <h2>Vidas: 
         <?php
-            //letras que pueden aparecer en la parte de arriba de la tabla
             $letras=["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"];
-            $ModoDeJuego;
-            $vidas;
-            //cantidad de cuadros y vidas que obtienes en base a la dificultad
-            if($_POST["gamemode"]=="Fácil"){
-                $ModoDeJuego=8;
-                $vidas=10;
-            }
-            elseif($_POST["gamemode"]=="Normal"){
-                $ModoDeJuego=10;
-                $vidas=8;
-            }
-            else{
-                $ModoDeJuego=13;
-                $vidas=9;
-            }
-            //imprime la cantidad de vidas
+            $ModoDeJuego=10;
+            $vidas=8;
              for($i = 1; $i <= $vidas; $i++){
                     echo "<img src='./vidas.png' width='20px' height='20px'>";
                 }
@@ -57,22 +36,9 @@
                     $tabla2;
                     echo "<tr>";
                     echo "<td></td>";
-                        //imprime las letras que van a salir
-                        for($a = 0; $a < $ModoDeJuego; $a++){
-                            echo "<td>$letras[$a]</td>";
-                        }
-                    echo "</tr>";
-                    //imprime los cuadros en los que se jugara
-                    for($i = 0; $i < $ModoDeJuego; $i++){
-                        echo "<tr>";
-                            $g=$i+1;
-                            echo "<td><h3>$g</h3></td>";
-                            //coloca las imagenes
-                            for($t = 0; $t < $ModoDeJuego; $t++){
-                                echo "<td>".$matriz[$i][$t]."</td>";
-                            }
-                            echo "<br>";
-                        echo "</tr>";
+                    //imprime las letras que van a salir
+                    for($a = 0; $a < $ModoDeJuego; $a++){
+                        echo "<td>$letras[$a]</td>";
                     }
                     $posicionX=["A"=>0,
                         "B"=>1,
@@ -88,8 +54,22 @@
                         "L"=>11,           
                         "M"=>12,                
                     ];
+                    $v=$_POST["Número"]-1;
                     $u=$posicionX[$_POST["Nombre"]];
-                    $matriz[$_POST["Número"]][$u]="<img src=./mar_fallo.jpg>";
+                    $matriz[$v][$u]="<img src=./mar_fallo.jpg width=60 height=60>";
+                    echo "</tr>";
+                    //imprime los cuadros en los que se jugara
+                    for($i = 0; $i < $ModoDeJuego; $i++){
+                        echo "<tr>";
+                            $g=$i+1;
+                            echo "<td><h3>$g</h3></td>";
+                            //coloca las imagenes
+                            for($t = 0; $t < $ModoDeJuego; $t++){
+                                echo "<td>".$matriz[$i][$t]."</td>";
+                            }
+                            echo "<br>";
+                        echo "</tr>";
+                    }
                 ?> 
             </body>
         </table>
